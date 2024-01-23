@@ -33,7 +33,7 @@ config = configparser.ConfigParser(inline_comment_prefixes="#")
 config.read("deep_learning_config.ini")
 
 # Load parameters
-data_loading_path = os.getcwd() + '/' + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
+data_loading_path = os.getcwd() + '/../../' + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
 verbose = config.getboolean("TRAINING_NAVIGATION", "VERBOSE")
 use_wandb = config.getboolean("WANDB", "USE_WANDB")
 
@@ -50,7 +50,7 @@ mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])
 std_image = float(config["NORMALIZATION"]["STD_IMAGE"])
 mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
 std_tof = float(config["NORMALIZATION"]["STD_TOF"])
-data_loading_path_navigation = config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
+data_loading_path_navigation = "../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
 
 # Unique id to save best model of this run
 unique_run_id = str(datetime.now())
@@ -186,7 +186,7 @@ def training(train_loader, validation_loader):
     model = kr.models.load_model(filepath='throwaway_models/best_model_gate_navigator' + unique_run_id)
 
     # Computes RMSE loss over the whole validation dataset.
-    print("Doing inference using RMSE over the whole validation dataset before QAT:")
+    print("\nDoing inference using RMSE over the whole validation dataset before QAT:\n")
     val_rmse_yaw = 0.0
     iterations = 0.0
     for batch_idx, data in enumerate(validation_loader):
@@ -210,7 +210,7 @@ def training(train_loader, validation_loader):
         val_rmse_yaw += tf.reduce_sum(loss_yaw)
         iterations += tf.cast(tf.size(label_yaw), tf.float32)
     val_rmse_yaw = tf.sqrt(val_rmse_yaw/iterations)
-    print("RMSE over the whole validation dataset:",val_rmse_yaw.numpy())
+    print("\nRMSE over the whole validation dataset:",val_rmse_yaw.numpy(),"\n")
 
     return model
 
@@ -353,8 +353,8 @@ def fine_tuning(model, train_loader, validation_loader):
     converter.representative_dataset = representative_dataset
     model = converter.convert()
 
-    file_path_saved_model = '../quantization_deployment_gap_sdk/tflite_models/gate_navigator_model_' + artifact_version + '.tflite'
-    print("Model .tflite saved in: ", file_path_saved_model)
+    file_path_saved_model = 'tflite_models/gate_navigator_model_' + artifact_version + '.tflite'
+    print("\nModel .tflite saved in: ", file_path_saved_model, "\n")
     with open(file_path_saved_model, 'wb') as f:
         f.write(model)
 
@@ -402,8 +402,14 @@ def fine_tuning(model, train_loader, validation_loader):
 
     # RMSE loss
     test_rmse_loss = numpy.sqrt(test_rmse_loss / iterations)
-    print("Inference on the quantized tflite model on 100% of the validation dataset resulted in the following loss:",
-          test_rmse_loss[0])
+    print("\nInference on the quantized tflite model on 100% of the validation dataset resulted in the following loss:",
+          test_rmse_loss[0], "\n")
+
+    # Save the new version index of the model in the config file
+
+    config.set("QUANTIZATION_NAVIGATION", "MODEL_IDENTIFIER", artifact_version)
+    with open('deep_learning_config.ini', 'w') as configfile:
+        config.write(configfile)
 
 
 def process_loaders():
@@ -443,14 +449,14 @@ def training_gate_navigator():
 
     train_loader,validation_loader = process_loaders() 
     
-    print("\n\n#Training using classic method")
+    print("\n\n#Training using classic method\n\n")
 
     try:
         model = training(train_loader=train_loader, validation_loader=validation_loader)
     except:
         model = gate_navigator_model(num_channels_start)
 
-    print("\n\n#Fine tuning")
+    print("\n\n#Fine tuning\n\n")
     fine_tuning(model=model, train_loader=train_loader,validation_loader=validation_loader)
 
 

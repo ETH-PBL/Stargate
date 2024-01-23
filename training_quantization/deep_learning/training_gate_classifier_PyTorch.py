@@ -30,7 +30,7 @@ config = configparser.ConfigParser(inline_comment_prefixes="#")
 config.read("deep_learning_config.ini")
 
 # Load parameters
-data_loading_path = os.getcwd() + '/' + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
+data_loading_path = os.getcwd() + "/../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
 verbose = config.getboolean("TRAINING_CLASSIFICATION", "VERBOSE")
 use_wandb = config.getboolean("WANDB", "USE_WANDB")
 
@@ -46,7 +46,7 @@ mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])
 std_image = float(config["NORMALIZATION"]["STD_IMAGE"])
 mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
 std_tof = float(config["NORMALIZATION"]["STD_TOF"])
-data_loading_path_classification = config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
+data_loading_path_classification = "../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
 
 def training(training_loader, validation_loader):
 
@@ -305,21 +305,24 @@ def convert_pretrained_pytorch_to_onnx(trained_model, artifact_version):
     input_names = ['image', 'tof']
     output_names = ['output']
 
-    file_path_saved_model = '../quantization_deployment_gap_sdk/onnx_models/' + 'gate_classifier_model_'+ artifact_version + '.onnx'
+    file_path_saved_model = 'onnx_models/' + 'gate_classifier_model_'+ artifact_version + '.onnx'
     torch.onnx.export(trained_model, (dummy_input_camera, dummy_input_tof),
                       file_path_saved_model,
                       input_names=input_names, output_names=output_names, export_params=True)
 
     print("Model .onnx saved in: ", file_path_saved_model)
+    config.set("QUANTIZATION_CLASSIFICATION","MODEL_IDENTIFIER",artifact_version)
+    with open('deep_learning_config.ini', 'w') as configfile:
+        config.write(configfile)
 
 
 def training_gate_classifier():
     training_loader, validation_loader = process_loaders()
 
-    print("\n\n#Training using classic method")
+    print("\n\n#Training using classic method\n\n")
     model, artifact_version = training(training_loader=training_loader, validation_loader=validation_loader)
 
-    print("\n\n#ONNX export")
+    print("\n\n#ONNX export\n\n")
     convert_pretrained_pytorch_to_onnx(trained_model=model,artifact_version=artifact_version)
 
 

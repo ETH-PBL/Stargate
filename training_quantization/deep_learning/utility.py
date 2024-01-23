@@ -14,6 +14,9 @@ import torch
 from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 
+from nntool.api import NNGraph
+import pickle
+
 
 ################################################################################
 # Navigation Data Loader Class
@@ -191,7 +194,7 @@ class _RepeatSampler(object):
 
 
 ################################################################################
-# Custom Loss
+# Custom Losses
 ################################################################################
 def custom_rmse_loss_PyTorch(label_yaw, pred_yaw, mse_loss):
     output_rmse_yaw_rate = torch.sqrt(mse_loss(pred_yaw, label_yaw))
@@ -206,6 +209,9 @@ def custom_mse_loss(label_yaw, pred_yaw, mse_loss):
     output_mse_yaw_rate = mse_loss(pred_yaw, label_yaw)
 
     return output_mse_yaw_rate
+
+def rmse_loss(labels, preds):
+    return np.sqrt(np.mean((preds - labels) ** 2))
 
 def custom_bce_loss(label, pred, bce_loss):
     label = label[:, None]  # Fix since predictions already have correct torch dimension [batch_size, 1] but labels are [batch_size,]
@@ -230,6 +236,9 @@ def custom_auroc(label, pred, binary_auroc):
     output_auroc = binary_auroc(pred, label)
 
     return output_auroc
+
+def accuracy_loss(labels, preds):
+    return (labels == preds).sum() / labels.shape[0]
 
 ################################################################################
 # Compute mean and std of images and ToF in dataset
@@ -268,3 +277,44 @@ def batch_mean_and_sd(data_loader):
     print('Mean/std images: ', mean_im, ' / ', std_im)
     print('Mean/std ToF: ', mean_tof, ' / ', std_tof)
 
+################################################################################
+#This function transforms an np.array image from the range [0,255] to the range [0, 1] and then standardizes both image and tof
+################################################################################
+def standardize_camera_tof_sample(image, tof, mean_image, std_image, mean_tof, std_tof):
+
+    image = ((image / 255.0) - mean_image) / std_image
+    tof = (tof - mean_tof) / std_tof
+    return image, tof
+
+
+def nn_tool_get_class_model(model_loading_path, model_identifier, quantize):
+
+    loading_path_model = model_loading_path + 'gate_classifier_model_' + model_identifier + '.onnx'
+    loading_path_quant_stats_file = model_loading_path + 'quant_stats_gate_classifier_model_' + model_identifier + '.json'
+
+    model = NNGraph.load_graph(loading_path_model, load_quantization=False)
+    model.adjust_order()
+
+    if quantize:
+        fp = open(loading_path_quant_stats_file, 'rb')
+        astats = pickle.load(fp)
+        fp.close()
+        model.fusions('scaled_match_group')
+
+        model.quantize(statistics=astats, schemes=['scaled'])
+        print(model.qshow())
+        # model.draw(quant_labels=True)
+    else:
+        model.fusions()
+        model.quantization = None
+
+    #print(model.show())
+    return model
+
+def nn_tool_get_navigation_model(model_identifier,  model_loading_path):
+    loading_path_model = model_loading_path + 'gate_navigator_model_' + model_identifier + '.tflite'
+    model = NNGraph.load_graph(loading_path_model, load_quantization=True)
+    model.adjust_order()
+    model.fusions()
+    print(model.qshow())
+    return model
