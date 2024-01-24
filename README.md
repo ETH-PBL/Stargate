@@ -23,7 +23,7 @@ If you use **Stargate** in an academic or industrial context, please cite the fo
 Publications: 
 * *Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs* [IEEE IoT Journal](https://ieeexplore.ieee.org/)
 
-## ## Getting Started
+## Getting Started
 https://github.com/ETH-PBL/Matrix_ToF_Drones
 
 ## Building and Flashing the Software
