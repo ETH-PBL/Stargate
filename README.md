@@ -4,6 +4,8 @@
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
+# Work in progress. The open source material will be available in 20 days
+
 # Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs
 **Authors: *Konstantin Kalenberg*, *Hanna Müller*, *Tommaso Polonelli*,  *Alberto Schiaffino*, *Vlad Niculescu*, *Cristian Cioflan*, *Michele Magno*, *Luca Benini*** 
 
@@ -34,14 +36,14 @@ https://github.com/ETH-PBL/Matrix_ToF_Drones
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/ETH-PBL/NanoSLAM.svg?style=flat-square
-[contributors-url]: https://github.com/ETH-PBL/NanoSLAM/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ETH-PBL/NanoSLAM.svg?style=flat-square
-[forks-url]: https://github.com/ETH-PBL/NanoSLAM/network/members
-[stars-shield]: https://img.shields.io/github/stars/ETH-PBL/NanoSLAM.svg?style=flat-square
-[stars-url]: https://github.com/ETH-PBL/NanoSLAM/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ETH-PBL/NanoSLAM.svg?style=flat-square
-[issues-url]: https://github.com/ETH-PBL/NanoSLAM/issues
-[license-shield]: https://img.shields.io/github/license/ETH-PBL/NanoSLAM.svg?style=flat-square
-[license-url]: https://github.com/ETH-PBL/NanoSLAM/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/ETH-PBL/Stargate.svg?style=flat-square
+[contributors-url]: https://github.com/ETH-PBL/Stargate/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ETH-PBL/Stargate.svg?style=flat-square
+[forks-url]: https://github.com/ETH-PBL/Stargate/network/members
+[stars-shield]: https://img.shields.io/github/stars/ETH-PBL/Stargate.svg?style=flat-square
+[stars-url]: https://github.com/ETH-PBL/Stargate/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ETH-PBL/Stargate.svg?style=flat-square
+[issues-url]: https://github.com/ETH-PBL/Stargate/issues
+[license-shield]: https://img.shields.io/github/license/ETH-PBL/Stargate.svg?style=flat-square
+[license-url]: https://github.com/ETH-PBL/Stargate/blob/master/LICENSE
 [product-screenshot]: pics/drone.png
