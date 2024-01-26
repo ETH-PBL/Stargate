@@ -29,8 +29,20 @@ Publications:
 https://github.com/ETH-PBL/Matrix_ToF_Drones
 
 ## Building and Flashing the Software
+
+### Training & Quantization of the CNN Models
 `cd training_quantization/deep_learning/` \
-`OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 main_deep_learning.py`
+`OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 main_deep_learning.py` 
+
+The models will be saved in the following directories: \
+"training_quantization/deep_learning/onnx_models", "training_quantization/deep_learning/tflite_models"
+
+### C-code generation for deployment
+`cd deployment/` \
+`python3 main_deployment.py` 
+
+The deployed models generated will be saved in the following directories: \
+"deployment/classification_model_quant", "deployment/classification_model_quant" 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
