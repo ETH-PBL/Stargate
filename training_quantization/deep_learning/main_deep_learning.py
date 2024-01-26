@@ -11,7 +11,7 @@ if __name__ == "__main__":
     print("GATE_NAVIGATOR TRAINING")
     print("#"*30+"\n")
     
-    #training_gate_navigator()    
+    training_gate_navigator()    
     validation_score_quantized_nav_model()
 
     print("\n"+"#"*30)
@@ -20,3 +20,6 @@ if __name__ == "__main__":
     
     training_gate_classifier()
     quantize_classifier()
+
+
+    # TODO: Add automatic writing of the new scales and zero points to the config file.
