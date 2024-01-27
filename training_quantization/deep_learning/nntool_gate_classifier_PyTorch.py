@@ -96,9 +96,9 @@ def compute_classification_validation_score_quantized_and_unquantized(config):
     mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
     std_tof = float(config["NORMALIZATION"]["STD_TOF"])
     print('Collecting classification model scores. This might take a while')
-    model_unquant = nn_tool_get_class_model(model_loading_path=model_loading_path, model_identifier=model_identifier_classification,
+    model_unquant, _ = nn_tool_get_class_model(model_loading_path=model_loading_path, model_identifier=model_identifier_classification,
                                        quantize=False)
-    model_quant = nn_tool_get_class_model(model_loading_path=model_loading_path, model_identifier=model_identifier_classification,
+    model_quant, dict_quant = nn_tool_get_class_model(model_loading_path=model_loading_path, model_identifier=model_identifier_classification,
                                     quantize=True)
 
     labels = list()
@@ -158,6 +158,12 @@ def compute_classification_validation_score_quantized_and_unquantized(config):
     print('#################################################')
     print('Accuracy classification un-quantized / quantized: ', accuracy_classification_unquant, ' / ', accuracy_classification_quant)
     print('#################################################')
+    config.set('QUANTIZATION_CLASSIFICATION', 'input_1_zero_point', str(dict_quant['input_1_zero']))
+    config.set('QUANTIZATION_CLASSIFICATION', 'input_1_scale', str(dict_quant['input_1_scale']))
+    config.set('QUANTIZATION_CLASSIFICATION', 'input_2_zero_point', str(dict_quant['input_2_zero']))
+    config.set('QUANTIZATION_CLASSIFICATION', 'input_2_scale', str(dict_quant['input_2_scale']))
+    config.set('QUANTIZATION_CLASSIFICATION', 'output_zero_point', str(dict_quant['output_zero']))
+    config.set('QUANTIZATION_CLASSIFICATION', 'output_scale', str(dict_quant['output_scale']))
 
 
 def quantize_classifier():
@@ -166,3 +172,5 @@ def quantize_classifier():
    
     compute_quantization_stats(config)
     compute_classification_validation_score_quantized_and_unquantized(config)
+    with open('deep_learning_config.ini', 'w') as configfile:
+        config.write(configfile)

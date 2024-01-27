@@ -27,7 +27,7 @@ def compute_navigation_validation_score_quantized_and_unquantized():
 
     # Compute navigation scores
     print('Collecting navigation model scores. This might take a while')
-    model = nn_tool_get_navigation_model(model_loading_path=navigation_loading_path,model_identifier=model_identifier_navigation)
+    model,dict_quant = nn_tool_get_navigation_model(model_loading_path=navigation_loading_path,model_identifier=model_identifier_navigation)
     labels = list()
     preds = list()
 
@@ -49,10 +49,20 @@ def compute_navigation_validation_score_quantized_and_unquantized():
 
     # Compute RMSE
     rmse_navigation= rmse_loss(np.asarray(labels), np.asarray(preds))
+
+    # Save quantization dictionary
+    config.set('QUANTIZATION_NAVIGATION', 'input_1_zero_point', str(dict_quant['input_1_zero']))
+    config.set('QUANTIZATION_NAVIGATION', 'input_1_scale', str(dict_quant['input_1_scale']))
+    config.set('QUANTIZATION_NAVIGATION', 'input_2_zero_point', str(dict_quant['input_2_zero']))
+    config.set('QUANTIZATION_NAVIGATION', 'input_2_scale', str(dict_quant['input_2_scale']))
+    config.set('QUANTIZATION_NAVIGATION', 'output_zero_point', str(dict_quant['output_zero']))
+    config.set('QUANTIZATION_NAVIGATION', 'output_scale', str(dict_quant['output_scale']))
+    with open('deep_learning_config.ini', 'w') as configfile:
+        config.write(configfile)
+
     return rmse_navigation
 
 def validation_score_quantized_nav_model():
+    
     score_navigation = compute_navigation_validation_score_quantized_and_unquantized()
-
-
     print('\n\nRMSE navigation quantized: ', score_navigation, "\n\n")

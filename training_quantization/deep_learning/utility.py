@@ -294,7 +294,7 @@ def nn_tool_get_class_model(model_loading_path, model_identifier, quantize):
 
     model = NNGraph.load_graph(loading_path_model, load_quantization=False)
     model.adjust_order()
-
+    dict_quantization = None
     if quantize:
         fp = open(loading_path_quant_stats_file, 'rb')
         astats = pickle.load(fp)
@@ -303,13 +303,22 @@ def nn_tool_get_class_model(model_loading_path, model_identifier, quantize):
 
         model.quantize(statistics=astats, schemes=['scaled'])
         print(model.qshow())
-        # model.draw(quant_labels=True)
+
+        quantization = model.quantization
+        dict_quantization = {
+        "input_1_zero" : quantization['input_1'].out_qs[0]._zero_point[0],
+        "input_1_scale" : quantization['input_1'].out_qs[0]._scale[0],
+        "input_2_zero" : quantization['input_2'].out_qs[0]._zero_point[0],
+        "input_2_scale" : quantization['input_2'].out_qs[0]._scale[0],
+        "output_zero" : quantization['output_1'].out_qs[0]._zero_point[0],
+        "output_scale" : quantization['output_1'].out_qs[0]._scale[0]
+    }
     else:
         model.fusions()
         model.quantization = None
 
     #print(model.show())
-    return model
+    return model, dict_quantization
 
 def nn_tool_get_navigation_model(model_identifier,  model_loading_path):
     loading_path_model = model_loading_path + 'gate_navigator_model_' + model_identifier + '.tflite'
@@ -317,4 +326,15 @@ def nn_tool_get_navigation_model(model_identifier,  model_loading_path):
     model.adjust_order()
     model.fusions()
     print(model.qshow())
-    return model
+
+    quantization = model.quantization
+    dict_quantization = {
+        "input_1_zero" : quantization['input_1'].out_qs[0]._zero_point[0],
+        "input_1_scale" : quantization['input_1'].out_qs[0]._scale[0],
+        "input_2_zero" : quantization['input_2'].out_qs[0]._zero_point[0],
+        "input_2_scale" : quantization['input_2'].out_qs[0]._scale[0],
+        "output_zero" : quantization['output_1'].out_qs[0]._zero_point[0],
+        "output_scale" : quantization['output_1'].out_qs[0]._scale[0]
+    }
+
+    return model, dict_quantization
