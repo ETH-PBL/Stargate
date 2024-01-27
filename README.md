@@ -37,13 +37,15 @@ https://github.com/ETH-PBL/Matrix_ToF_Drones
 The models will be saved in the following directories: \
 "training_quantization/deep_learning/onnx_models", "training_quantization/deep_learning/tflite_models"
 
+Zero points and Scale values of inputs and output are saved in the "training_quantization/deep_learning/deep_learning_config.ini" file.
+
+
 ### C-code generation for deployment
 `cd deployment/` \
 `python3 main_deployment.py` 
 
 The deployed models generated will be saved in the following directories: \
 "deployment/classification_model_quant", "deployment/classification_model_quant" 
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
