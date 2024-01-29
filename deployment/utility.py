@@ -6,8 +6,8 @@ import numpy as np
 
 def nn_tool_get_class_model(model_loading_path, model_identifier, quantize):
 
-    loading_path_model = "../training_quantization/deep_learning/" + model_loading_path + 'gate_classifier_model_' + model_identifier + '.onnx'
-    loading_path_quant_stats_file = "../training_quantization/deep_learning/" + model_loading_path + 'quant_stats_gate_classifier_model_' + model_identifier + '.json'
+    loading_path_model = "../training_quantization/" + model_loading_path + 'gate_classifier_model_' + model_identifier + '.onnx'
+    loading_path_quant_stats_file = "../training_quantization/" + model_loading_path + 'quant_stats_gate_classifier_model_' + model_identifier + '.json'
 
     model = NNGraph.load_graph(loading_path_model, load_quantization=False)
     model.adjust_order()
@@ -29,12 +29,13 @@ def nn_tool_get_class_model(model_loading_path, model_identifier, quantize):
     return model
 
 def nn_tool_get_navigation_model(model_identifier,  model_loading_path):
-    loading_path_model = "../training_quantization/deep_learning/"+model_loading_path + 'gate_navigator_model_' + model_identifier + '.tflite'
+    loading_path_model = "../training_quantization/"+model_loading_path + 'gate_navigator_model_' + model_identifier + '.tflite'
     model = NNGraph.load_graph(loading_path_model, load_quantization=True)
     model.adjust_order()
     model.fusions()
 
     print(model.qshow())
+
     return model
 
 ################################################################################

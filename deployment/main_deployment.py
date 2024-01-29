@@ -5,7 +5,7 @@ from test_models_on_target import get_models_val_data_classification, get_models
 def main():
 
     config = configparser.ConfigParser(inline_comment_prefixes="#")
-    config.read("../training_quantization/deep_learning/deep_learning_config.ini")
+    config.read("../training_quantization/deep_learning_config.ini")
 
     num_samples_to_inspect = 1
 
@@ -32,7 +32,7 @@ def main():
                                             model_prefix="Classification",model_unquant=model_classification_unquant)
     
     print("\n\nIf results are not correctly scaled when dequantized, please adjust scale and zero point values in :\n",
-          "training_quantization/deep_learning/deep_learning_config.ini\n\n")
+          "training_quantization/deep_learning_config.ini\n\n")
 
 if __name__ == "__main__":
     main()

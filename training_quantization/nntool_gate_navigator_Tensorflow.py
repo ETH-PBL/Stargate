@@ -17,7 +17,7 @@ from utility import standardize_camera_tof_sample, rmse_loss, nn_tool_get_naviga
 def compute_navigation_validation_score_quantized_and_unquantized():
     config = configparser.ConfigParser(inline_comment_prefixes="#")
     config.read("deep_learning_config.ini")
-    data_loading_path_navigation = "../../"+config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"] + 'validation/'
+    data_loading_path_navigation = "../"+config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"] + 'validation/'
     model_identifier_navigation = config["QUANTIZATION_NAVIGATION"]["MODEL_IDENTIFIER"]
     navigation_loading_path = config["QUANTIZATION_NAVIGATION"]["NAVIGATION_LOADING_MODEL"]
     mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])

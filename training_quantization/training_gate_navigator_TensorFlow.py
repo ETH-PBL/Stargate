@@ -28,36 +28,23 @@ from utility import ImavChallengeNavigationDataset
 from models.gate_navigator_Tensorflow_model import gate_navigator_model
 
 
-# Load config file
-config = configparser.ConfigParser(inline_comment_prefixes="#")
-config.read("deep_learning_config.ini")
-
-# Load parameters
-data_loading_path = os.getcwd() + '/../../' + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
-verbose = config.getboolean("TRAINING_NAVIGATION", "VERBOSE")
-use_wandb = config.getboolean("WANDB", "USE_WANDB")
-
-num_workers = int(config["TRAINING_NAVIGATION"]["NUM_WORKERS"])
-batch_size = int(config["TRAINING_NAVIGATION"]["BATCH_SIZE"])
-num_channels_start = int(config["TRAINING_NAVIGATION"]["NUM_CHANNELS_START"])
-lr = float(config["TRAINING_NAVIGATION"]["LEARNING_RATE"])
-lr_decay = float(config["TRAINING_NAVIGATION"]["LEARNING_RATE_DECAY"])
-epochs_training = int(config["TRAINING_NAVIGATION"]["EPOCHS"])
-epochs_tuning = int(config["FINE_TUNING_NAVIGATION"]["EPOCHS"])
-dropout_p = float(config["TRAINING_NAVIGATION"]["DROPOUT_PROB"])
-
-mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])
-std_image = float(config["NORMALIZATION"]["STD_IMAGE"])
-mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
-std_tof = float(config["NORMALIZATION"]["STD_TOF"])
-data_loading_path_navigation = "../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
-
 # Unique id to save best model of this run
 unique_run_id = str(datetime.now())
 
 
-def training(train_loader, validation_loader):
-    
+def training(train_loader, validation_loader, config):
+
+    # Load parameters
+    verbose = config.getboolean("TRAINING_NAVIGATION", "VERBOSE")
+    use_wandb = config.getboolean("WANDB", "USE_WANDB")
+    batch_size = int(config["TRAINING_NAVIGATION"]["BATCH_SIZE"])
+    num_channels_start = int(config["TRAINING_NAVIGATION"]["NUM_CHANNELS_START"])
+    lr = float(config["TRAINING_NAVIGATION"]["LEARNING_RATE"])
+    lr_decay = float(config["TRAINING_NAVIGATION"]["LEARNING_RATE_DECAY"])
+    epochs_training = int(config["TRAINING_NAVIGATION"]["EPOCHS"])
+    dropout_p = float(config["TRAINING_NAVIGATION"]["DROPOUT_PROB"])
+    data_loading_path_navigation = "../" + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
+
     # Set up weights and biases
     if use_wandb:
         wandb.init(project="StarGate", group="")
@@ -215,8 +202,14 @@ def training(train_loader, validation_loader):
     return model
 
 
-def fine_tuning(model, train_loader, validation_loader):
-   
+def fine_tuning(model, train_loader, validation_loader, config):
+   # Load parameters
+    use_wandb = config.getboolean("WANDB", "USE_WANDB")
+    lr = float(config["TRAINING_NAVIGATION"]["LEARNING_RATE"])
+    lr_decay = float(config["TRAINING_NAVIGATION"]["LEARNING_RATE_DECAY"])
+    epochs_training = int(config["TRAINING_NAVIGATION"]["EPOCHS"])
+    epochs_tuning = int(config["FINE_TUNING_NAVIGATION"]["EPOCHS"])
+    
     model = tfmot.quantization.keras.quantize_model(model)
     
     # Optimizer
@@ -407,12 +400,23 @@ def fine_tuning(model, train_loader, validation_loader):
 
     # Save the new version index of the model in the config file
 
-    config.set("QUANTIZATION_NAVIGATION", "MODEL_IDENTIFIER", artifact_version)
+    config.set("QUANTIZATION_NAVIGATION", "model_identifier", artifact_version)
     with open('deep_learning_config.ini', 'w') as configfile:
         config.write(configfile)
 
 
-def process_loaders():
+
+def process_loaders(config):
+    
+    # Load parameters
+    data_loading_path = os.getcwd() + '/../' + config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"]
+    num_workers = int(config["TRAINING_NAVIGATION"]["NUM_WORKERS"])
+    batch_size = int(config["TRAINING_NAVIGATION"]["BATCH_SIZE"])
+    mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])
+    std_image = float(config["NORMALIZATION"]["STD_IMAGE"])
+    mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
+    std_tof = float(config["NORMALIZATION"]["STD_TOF"])
+    
     # preprare images and ToF fow training and validation
     standartizer_image = transforms.Normalize(mean=[mean_image],
                                               std=[std_image])  # Determined from: from utility import batch_mean_and_sd
@@ -445,21 +449,18 @@ def process_loaders():
 
 
 def training_gate_navigator():
+    # Load config file
+    config = configparser.ConfigParser(inline_comment_prefixes="#")
+    config.read("deep_learning_config.ini")
+
     print("Tensorflow found the following GPUs :\n", tf.config.list_physical_devices('GPU'))
 
-    train_loader,validation_loader = process_loaders() 
+    train_loader,validation_loader = process_loaders(config) 
     
     print("\n\n#Training using classic method\n\n")
 
-    try:
-        model = training(train_loader=train_loader, validation_loader=validation_loader)
-    except:
-        model = gate_navigator_model(num_channels_start)
+    model = training(train_loader=train_loader, validation_loader=validation_loader, config=config)
+
 
     print("\n\n#Fine tuning\n\n")
-    fine_tuning(model=model, train_loader=train_loader,validation_loader=validation_loader)
-
-
-if __name__ == "__main__":
-   training_gate_navigator()
-    
+    fine_tuning(model=model, train_loader=train_loader,validation_loader=validation_loader, config=config)

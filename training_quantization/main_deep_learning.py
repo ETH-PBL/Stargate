@@ -21,5 +21,3 @@ if __name__ == "__main__":
     training_gate_classifier()
     quantize_classifier()
 
-
-    # TODO: Add automatic writing of the new scales and zero points to the config file.

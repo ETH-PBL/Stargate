@@ -23,7 +23,7 @@ from utility import nn_tool_get_class_model, accuracy_loss
 
 
 def compute_quantization_stats(config):
-    data_loading_path_classification = "../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"] + 'training/'
+    data_loading_path_classification = "../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"] + 'training/'
     model_loading_path = config["QUANTIZATION_CLASSIFICATION"]["CLASSIFICATION_LOADING_MODEL"]
     model_identifier_classification = config["QUANTIZATION_CLASSIFICATION"]["MODEL_IDENTIFIER"]
 
@@ -87,7 +87,7 @@ def compute_quantization_stats(config):
     print('Saved classification quantization stats')
 
 def compute_classification_validation_score_quantized_and_unquantized(config):
-    data_loading_path_classification = "../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"] + 'training/'
+    data_loading_path_classification = "../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"] + 'training/'
     model_loading_path = config["QUANTIZATION_CLASSIFICATION"]["CLASSIFICATION_LOADING_MODEL"]
     model_identifier_classification = config["QUANTIZATION_CLASSIFICATION"]["MODEL_IDENTIFIER"]
 

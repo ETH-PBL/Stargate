@@ -25,30 +25,19 @@ from torchmetrics.classification import BinaryAccuracy, BinaryF1Score, AUROC
 from utility import ImavChallengeClassificationDataset, custom_bce_loss, custom_accuracy_loss, custom_f1_loss, custom_auroc
 from models.gate_classifier_PyTorch_model import GateClassifier
 
-# Load config file
-config = configparser.ConfigParser(inline_comment_prefixes="#")
-config.read("deep_learning_config.ini")
 
-# Load parameters
-data_loading_path = os.getcwd() + "/../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
-verbose = config.getboolean("TRAINING_CLASSIFICATION", "VERBOSE")
-use_wandb = config.getboolean("WANDB", "USE_WANDB")
+def training(training_loader, validation_loader,config):
 
-num_workers = int(config["TRAINING_CLASSIFICATION"]["NUM_WORKERS"])
-batch_size = int(config["TRAINING_CLASSIFICATION"]["BATCH_SIZE"])
-num_channels_start = int(config["TRAINING_CLASSIFICATION"]["NUM_CHANNELS_START"])
-lr = float(config["TRAINING_CLASSIFICATION"]["LEARNING_RATE"])
-lr_decay = float(config["TRAINING_CLASSIFICATION"]["LEARNING_RATE_DECAY"])
-epochs = int(config["TRAINING_CLASSIFICATION"]["EPOCHS"])
-dropout_p = float(config["TRAINING_CLASSIFICATION"]["DROPOUT_PROB"])
-
-mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])
-std_image = float(config["NORMALIZATION"]["STD_IMAGE"])
-mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
-std_tof = float(config["NORMALIZATION"]["STD_TOF"])
-data_loading_path_classification = "../../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
-
-def training(training_loader, validation_loader):
+     # Load parameters
+    verbose = config.getboolean("TRAINING_CLASSIFICATION", "VERBOSE")
+    use_wandb = config.getboolean("WANDB", "USE_WANDB")
+    batch_size = int(config["TRAINING_CLASSIFICATION"]["BATCH_SIZE"])
+    num_channels_start = int(config["TRAINING_CLASSIFICATION"]["NUM_CHANNELS_START"])
+    lr = float(config["TRAINING_CLASSIFICATION"]["LEARNING_RATE"])
+    lr_decay = float(config["TRAINING_CLASSIFICATION"]["LEARNING_RATE_DECAY"])
+    epochs = int(config["TRAINING_CLASSIFICATION"]["EPOCHS"])
+    dropout_p = float(config["TRAINING_CLASSIFICATION"]["DROPOUT_PROB"])
+    data_loading_path_classification = "../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]
 
     # Unique id to save best model of this run
     unique_run_id = str(datetime.now())
@@ -265,7 +254,16 @@ def training(training_loader, validation_loader):
     return best_model,artifact_version
 
 
-def process_loaders():
+def process_loaders(config):
+    # Load parameters
+    data_loading_path = os.getcwd() + "/../" + config["DATA_PATHS"]["DATA_LOADING_PATH_CLASSIFICATION"]   
+    num_workers = int(config["TRAINING_CLASSIFICATION"]["NUM_WORKERS"])
+    batch_size = int(config["TRAINING_CLASSIFICATION"]["BATCH_SIZE"])    
+    mean_image = float(config["NORMALIZATION"]["MEAN_IMAGE"])
+    std_image = float(config["NORMALIZATION"]["STD_IMAGE"])
+    mean_tof = float(config["NORMALIZATION"]["MEAN_TOF"])
+    std_tof = float(config["NORMALIZATION"]["STD_TOF"])
+    
     # Create transforms to be applied in dataloader
     standartizer_image = transforms.Normalize(mean=[mean_image], std=[std_image])  # Determined from: from utility import batch_mean_and_sd
     standartizer_tof = transforms.Normalize(mean=[mean_tof], std=[std_tof])  # Determined from: from utility import batch_mean_and_sd
@@ -294,8 +292,10 @@ def process_loaders():
     return train_loader, validation_loader
 
 
-def convert_pretrained_pytorch_to_onnx(trained_model, artifact_version):
+def convert_pretrained_pytorch_to_onnx(trained_model, artifact_version,config):
    
+    
+
     # Export model to onnx format
     trained_model.eval()
    
@@ -317,14 +317,15 @@ def convert_pretrained_pytorch_to_onnx(trained_model, artifact_version):
 
 
 def training_gate_classifier():
-    training_loader, validation_loader = process_loaders()
+    # Load config file
+    config = configparser.ConfigParser(inline_comment_prefixes="#")
+    config.read("deep_learning_config.ini")
+
+    training_loader, validation_loader = process_loaders(config=config)
 
     print("\n\n#Training using classic method\n\n")
-    model, artifact_version = training(training_loader=training_loader, validation_loader=validation_loader)
+    model, artifact_version = training(training_loader=training_loader, validation_loader=validation_loader, config=config)
 
     print("\n\n#ONNX export\n\n")
-    convert_pretrained_pytorch_to_onnx(trained_model=model,artifact_version=artifact_version)
+    convert_pretrained_pytorch_to_onnx(trained_model=model,artifact_version=artifact_version, config=config)
 
-
-if __name__ == "__main__":
-    training_gate_classifier()
