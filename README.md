@@ -30,6 +30,9 @@ https://github.com/ETH-PBL/Matrix_ToF_Drones
 
 ## Building and Flashing the Software
 
+Clone and install the following repo: [gap_sdk](https://github.com/GreenWaves-Technologies/gap_sdk). \
+Source the `sourceme.h` in the main directory and select 2-GAPOC_B_V2.
+
 ### Training & Quantization of the CNN Models
 `cd training_quantization/deep_learning/` \
 `OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 main_deep_learning.py` 
