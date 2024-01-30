@@ -1,5 +1,8 @@
 # Dataset
-The provided [open-source dataset](https://zenodo.org/records/10546408) consists of 40'000 datapoints for the classification task and 70'000 datapoints for the navigation task. The datapoints are collected over randomized runs in a changing environment according to the following structure.
+The provided [open-source dataset](https://zenodo.org/records/10546408) consists of 40'000 datapoints for the classification task and 70'000 datapoints for the navigation task. In this folder we provide a minimal dataset sample to run the CNN training scripts.
+
+
+The datapoints are collected over randomized runs in a changing environment according to the following structure:
 * classification task training: 320 simulated runs showing a gate
 * classification task training: 320 simulated runs showing no gate
 * classification task validation: 80 simulated runs showing a gate
