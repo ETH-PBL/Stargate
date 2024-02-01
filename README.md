@@ -28,18 +28,25 @@ Publications:
 ## Getting Started
 https://github.com/ETH-PBL/Matrix_ToF_Drones
 
+## Installing necessary tools and libraries
+
+Install the toolchain and the SDK of GAP8, by looking at the README file of the [gap_sdk repo](https://github.com/GreenWaves-Technologies/gap_sdk/tree/e431b7f1ca687d10ad08c3def01a754583fec5da). 
+
+Please keep in mind that we used an older version of the SDK, therefore please use the following commands during the installation to clone the correct commit: \
+`git clone https://github.com/GreenWaves-Technologies/gap_sdk.git` \
+`git reset --hard e431b7f1ca687d10ad08c3def01a754583fec5da`
+
 ## Building and Flashing the Software
 
-Clone and install the following repo: [gap_sdk](https://github.com/GreenWaves-Technologies/gap_sdk). \
-Source the `sourceme.h` in the main directory and select 2-GAPOC_B_V2.
+Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
+`source sourceme.h` 
 
 ### Training & Quantization of the CNN Models
 
-
-From the main folder of the repository execute the following commands:
+From the main folder of this repository execute the following commands:
 
 `cd training_quantization/` \
-`OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 main_deep_learning.py` 
+`python3 main_deep_learning.py` 
 
 The models will be saved in the following directories: \
 "training_quantization/onnx_models", "training_quantization/tflite_models"
