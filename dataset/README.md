@@ -1,7 +1,6 @@
 # Dataset
 The provided [open-source dataset](https://zenodo.org/records/10546408) consists of 40'000 datapoints for the classification task and 70'000 datapoints for the navigation task. In this folder we provide a minimal dataset sample to run the CNN training scripts.
 
-
 The datapoints are collected over randomized runs in a changing environment according to the following structure:
 * classification task training: 320 simulated runs showing a gate
 * classification task training: 320 simulated runs showing no gate
@@ -30,6 +29,9 @@ Additionaly, each run folder contains an `setup_image.png` showing a 2D map of t
 <img src="setup_img.png" alt="drawing" width="400"/>
 
 ## Classification
-The labels for the classification task are implicitly given by the folder structure of the dataset. Both the classification training and validation folders contain subfolders named gate (scene contains a gate) and no_gate (scene contains no gate). The structure for each run is again identical to the description above
+The labels for the classification task are implicitly given by the folder structure of the dataset. Both the classification training and validation folders contain subfolders named gate (scene contains a gate) and no_gate (scene contains no gate). The structure for each run is again identical to the description above.
+
+## License
+The data is released under CC BY-ND 4.0, see the LICENSE file in the current directory.
 
 
