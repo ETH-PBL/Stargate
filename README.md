@@ -64,3 +64,9 @@ The deployed models generated will be saved in the following directories: \
 [license-shield]: https://img.shields.io/github/license/ETH-PBL/Stargate.svg?style=flat-square
 [license-url]: https://github.com/ETH-PBL/Stargate/blob/master/LICENSE
 [product-screenshot]: pics/drone.png
+
+
+## License
+
+Unless explicitly stated otherwise, the code is released under GPL-3.0, see the LICENSE file in the root of this repository for details.
+As an exception, the data under the directory `./dataset` is released under Creative Commons Attribution-NoDerivatives 4.0 International, see `./dataset/LICENSE` for details.
