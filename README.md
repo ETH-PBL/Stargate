@@ -34,16 +34,23 @@ Clone and install the following repo: [gap_sdk](https://github.com/GreenWaves-Te
 Source the `sourceme.h` in the main directory and select 2-GAPOC_B_V2.
 
 ### Training & Quantization of the CNN Models
-`cd training_quantization/deep_learning/` \
+
+
+From the main folder of the repository execute the following commands:
+
+`cd training_quantization/` \
 `OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 main_deep_learning.py` 
 
 The models will be saved in the following directories: \
-"training_quantization/deep_learning/onnx_models", "training_quantization/deep_learning/tflite_models"
+"training_quantization/onnx_models", "training_quantization/tflite_models"
 
-Zero points and Scale values of inputs and output are saved in the "training_quantization/deep_learning/deep_learning_config.ini" file.
+Quantization's zero points and scale values of inputs and output are saved in the "training_quantization/deep_learning_config.ini" file.
 
 
 ### C-code generation for deployment
+
+From the main folder of the repository execute the following commands:
+
 `cd deployment/` \
 `python3 main_deployment.py` 
 
