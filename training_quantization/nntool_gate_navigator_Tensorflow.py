@@ -17,14 +17,14 @@
 # ======================================================================
 #
 # Authors: 
-# Konstantin Kalenberg, ETH Zurich (kkalenbe@ethz.ch)
+# Konstantin Kalenberg, ETH Zurich
 # Hanna Müller ETH Zurich (hanmuell@iis.ee.ethz.ch)
-# Tommaso Polonelli, ETH Zurich (tommaso.polonelli@pbl.ee.ethz.ch)
-# Alberto Schiaffino, ETH Zurich (aschiaffino@ethz.ch)
-# Vlad Niculescu, ETH Zurich (vladn@ethz.ch)
-# Cristian Cioflan, ETH Zurich (cioflanc@ethz.ch)
-# Michele Magno, ETH Zurich (michele.magno@pbl.ee.ethz.ch)
-# Luca Benini, ETH Zurich (lbenini@iis.ee.ethz.ch)
+# Tommaso Polonelli, ETH Zurich
+# Alberto Schiaffino, ETH Zurich
+# Vlad Niculescu, ETH Zurich
+# Cristian Cioflan, ETH Zurich
+# Michele Magno, ETH Zurich
+# Luca Benini, ETH Zurich
 #
 # This script computes the score for the quantized GateNavigator model
 # The data used for the scores is the same as the validation data of the networks
