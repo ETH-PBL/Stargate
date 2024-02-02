@@ -28,27 +28,6 @@ Publications:
 ## Getting Started
 https://github.com/ETH-PBL/Matrix_ToF_Drones
 
-## Setting up environment and Python libraries
-
-The project has been tested using a conda environment featuring Python 3.9.18. 
-It can be set by using the following commands: \
-`conda create --name Stargate python=3.9` \
-`conda activate Stargate` \
-`pip3 install -r requirements.txt` 
-
-## Installing necessary tools and libraries
-
-Install the toolchain and the SDK of GAP8, by looking at the README file of the [gap_sdk repo](https://github.com/GreenWaves-Technologies/gap_sdk/tree/e431b7f1ca687d10ad08c3def01a754583fec5da). 
-
-Please keep in mind that we used an older version of the SDK, therefore please use the following commands during the installation to clone the correct commit: \
-`git clone https://github.com/GreenWaves-Technologies/gap_sdk.git` \
-`git reset --hard e431b7f1ca687d10ad08c3def01a754583fec5da`
-
-## Building and Flashing the Software
-
-Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
-`source sourceme.h`
-
 ## Open-source dataset
 
 Please refer to the README in the folder `dataset` for more information on our [open-source dataset](https://zenodo.org/records/10546408).
@@ -56,6 +35,27 @@ Please refer to the README in the folder `dataset` for more information on our [
 ## Synthetic data generation
 
 Please refer to the README in the folder `automated_data_collection` for more information on generating your own synthetic data.
+
+## Building and Flashing the Software
+
+### Setting up environment and Python libraries
+
+The project has been tested using a conda environment featuring Python 3.9.18. 
+It can be set by using the following commands: \
+`conda create --name Stargate python=3.9` \
+`conda activate Stargate` \
+`pip3 install -r requirements.txt` 
+
+### Installing necessary tools and libraries
+
+Install the toolchain and the SDK of GAP8, by looking at the README file of the [gap_sdk repo](https://github.com/GreenWaves-Technologies/gap_sdk/tree/e431b7f1ca687d10ad08c3def01a754583fec5da). 
+
+Please keep in mind that we used an older version of the SDK, therefore please use the following commands during the installation to clone the correct commit: \
+`git clone https://github.com/GreenWaves-Technologies/gap_sdk.git` \
+`git reset --hard e431b7f1ca687d10ad08c3def01a754583fec5da`
+
+Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
+`source sourceme.h`
 
 ### Training & Quantization of the CNN Models
 
