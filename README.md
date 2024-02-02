@@ -51,7 +51,7 @@ Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_
 
 ## Open-source dataset
 
-Please refer to the README in the folder 'dataset' for more information on our [open-source dataset](https://zenodo.org/records/10546408).
+Please refer to the README in the folder `dataset` for more information on our [open-source dataset](https://zenodo.org/records/10546408).
 
 ## Synthetic data generation
 
