@@ -47,7 +47,15 @@ Please keep in mind that we used an older version of the SDK, therefore please u
 ## Building and Flashing the Software
 
 Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
-`source sourceme.h` 
+`source sourceme.h`
+
+## Open-source dataset
+
+Please refer to the README in the folder 'dataset' for more information on our [open-source dataset](https://zenodo.org/records/10546408).
+
+## Synthetic data generation
+
+Please refer to the README in the folder `automated_data_collection` for more information on generating your own synthetic data.
 
 ### Training & Quantization of the CNN Models
 
