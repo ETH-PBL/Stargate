@@ -28,6 +28,14 @@ Publications:
 ## Getting Started
 https://github.com/ETH-PBL/Matrix_ToF_Drones
 
+## Setting up environment and Python libraries
+
+The project has been tested using a conda environment featuring Python 3.9.18. 
+It can be set by using the following commands: \
+`conda create --name Stargate python=3.9` \
+`conda activate Stargate` \
+`pip3 install -r requirements.txt` 
+
 ## Installing necessary tools and libraries
 
 Install the toolchain and the SDK of GAP8, by looking at the README file of the [gap_sdk repo](https://github.com/GreenWaves-Technologies/gap_sdk/tree/e431b7f1ca687d10ad08c3def01a754583fec5da). 
