@@ -36,7 +36,7 @@ def main():
     config = configparser.ConfigParser(inline_comment_prefixes="#")
     config.read("../training_quantization/deep_learning_config.ini")
 
-    num_samples_to_inspect = 0
+    num_samples_to_inspect = 1
 
     model_navigation, val_data_navigation, val_labels_navigation = get_models_val_data_navigation(config)
 

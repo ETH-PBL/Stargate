@@ -347,6 +347,8 @@ def fine_tuning(model, train_loader, validation_loader, config):
         # Get the version of the saved artifact
         artifact_version = artifact.version
         wandb.finish()
+    else:
+        artifact_version = 'local'
 
     #convert the dataset
     converter = tf.lite.TFLiteConverter.from_keras_model(model)

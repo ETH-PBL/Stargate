@@ -273,6 +273,9 @@ def training(training_loader, validation_loader,config):
         wandb.log({"val_confusion_mat": wandb.plot.confusion_matrix(y_true=best_val_labels, probs=best_val_preds,
                                                                     class_names=["gate", "no_gate"])})
         wandb.finish()
+    
+    else:
+        artifact_version = 'local'
 
     best_model = GateClassifier(num_channels_start=num_channels_start, dropout_p=dropout_p)
     best_model.load_state_dict(torch.load('throwaway_models/best_model_gate_classifier' + unique_run_id + '.pt')['gate_classifier_state_dict'])
