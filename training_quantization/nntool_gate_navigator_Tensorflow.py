@@ -39,9 +39,7 @@ import configparser
 from utility import standardize_camera_tof_sample, rmse_loss, nn_tool_get_navigation_model
 
 
-def compute_navigation_validation_score_quantized_and_unquantized():
-    config = configparser.ConfigParser(inline_comment_prefixes="#")
-    config.read("deep_learning_config.ini")
+def compute_navigation_validation_score_quantized_and_unquantized(config):
     data_loading_path_navigation = "../"+config["DATA_PATHS"]["DATA_LOADING_PATH_NAVIGATION"] + 'validation/'
     model_identifier_navigation = config["QUANTIZATION_NAVIGATION"]["MODEL_IDENTIFIER"]
     navigation_loading_path = config["QUANTIZATION_NAVIGATION"]["NAVIGATION_LOADING_MODEL"]
@@ -82,12 +80,24 @@ def compute_navigation_validation_score_quantized_and_unquantized():
     config.set('QUANTIZATION_NAVIGATION', 'input_2_scale', str(dict_quant['input_2_scale']))
     config.set('QUANTIZATION_NAVIGATION', 'output_zero_point', str(dict_quant['output_zero']))
     config.set('QUANTIZATION_NAVIGATION', 'output_scale', str(dict_quant['output_scale']))
-    with open('deep_learning_config.ini', 'w') as configfile:
-        config.write(configfile)
+
 
     return rmse_navigation
 
 def validation_score_quantized_nav_model():
-    
-    score_navigation = compute_navigation_validation_score_quantized_and_unquantized()
+    config = configparser.ConfigParser(inline_comment_prefixes="#")
+    config.read("deep_learning_config.ini")
+   
+    score_navigation = compute_navigation_validation_score_quantized_and_unquantized(config)
     print('\n\nRMSE navigation quantized: ', score_navigation, "\n\n")
+
+    with open('deep_learning_config.ini', 'w') as configfile:
+        config.write(configfile)
+    
+    with open('tflite_models/quant_values_gate_navigator_model_'+ config['QUANTIZATION_NAVIGATION']['MODEL_IDENTIFIER'] + '.txt', 'w') as fp:
+        fp.write('input_1_zero_point: ' + config['QUANTIZATION_NAVIGATION']['input_1_zero_point'] + '\n')
+        fp.write('input_1_scale: ' + config['QUANTIZATION_NAVIGATION']['input_1_scale'] + '\n')
+        fp.write('input_2_zero_point: ' + config['QUANTIZATION_NAVIGATION']['input_2_zero_point'] + '\n')
+        fp.write('input_2_scale: ' + config['QUANTIZATION_NAVIGATION']['input_2_scale'] + '\n')
+        fp.write('output_zero_point: ' + config['QUANTIZATION_NAVIGATION']['output_zero_point'] + '\n')
+        fp.write('output_scale: ' + config['QUANTIZATION_NAVIGATION']['output_scale'] + '\n')

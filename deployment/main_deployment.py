@@ -36,7 +36,7 @@ def main():
     config = configparser.ConfigParser(inline_comment_prefixes="#")
     config.read("../training_quantization/deep_learning_config.ini")
 
-    num_samples_to_inspect = 1
+    num_samples_to_inspect = 0
 
     model_navigation, val_data_navigation, val_labels_navigation = get_models_val_data_navigation(config)
 
@@ -60,8 +60,9 @@ def main():
                                             num_iterations=num_samples_to_inspect, is_nav=False,
                                             model_prefix="Classification",model_unquant=model_classification_unquant)
     
-    print("\n\nIf results are not correctly scaled when dequantized, please adjust scale and zero point values in :\n",
-          "training_quantization/deep_learning_config.ini\n\n")
+    print("\n\nIf results are not correctly scaled when dequantized, please adjust scale and zero point values in :"+
+          " training_quantization/deep_learning_config.ini\n"+
+          "The quantization values for each version of your models are saved in training_quantization/onnx_models and training_quantization/tflite_models as .txt files\n")
 
 if __name__ == "__main__":
     main()

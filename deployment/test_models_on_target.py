@@ -31,6 +31,7 @@
 
 import numpy as np
 import os
+import shutil
 
 from tqdm import tqdm
 import random
@@ -131,7 +132,10 @@ def get_models_val_data_classification(config):
 
 def compare_models_unquant_quant_on_target(model_quant, data, labels, directory, zero_point, scale,
                                            num_iterations, model_prefix,is_nav=False, model_unquant=None):
-   
+    if os.path.exists(directory):
+        shutil.rmtree(directory)
+
+
     for _ in range(0, num_iterations):
         print("Iteration ", _)
         data_index = random.randint(0, len(data) - 1)
@@ -148,7 +152,7 @@ def compare_models_unquant_quant_on_target(model_quant, data, labels, directory,
             output_tensors=True,
             at_log=False,
             dont_run=False,
-            do_clean=False,
+            do_clean=True,
             source='gapoc_b_v2',
             at_loglevel=1,
             print_output=False,

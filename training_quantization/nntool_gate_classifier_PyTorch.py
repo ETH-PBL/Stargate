@@ -200,3 +200,12 @@ def quantize_classifier():
     compute_classification_validation_score_quantized_and_unquantized(config)
     with open('deep_learning_config.ini', 'w') as configfile:
         config.write(configfile)
+
+    with open('onnx_models/quant_values_gate_classifier_model_'+ config['QUANTIZATION_CLASSIFICATION']['MODEL_IDENTIFIER'] + '.txt', 'w') as fp:
+        fp.write('input_1_zero_point: ' + config['QUANTIZATION_CLASSIFICATION']['input_1_zero_point'] + '\n')
+        fp.write('input_1_scale: ' + config['QUANTIZATION_CLASSIFICATION']['input_1_scale'] + '\n')
+        fp.write('input_2_zero_point: ' + config['QUANTIZATION_CLASSIFICATION']['input_2_zero_point'] + '\n')
+        fp.write('input_2_scale: ' + config['QUANTIZATION_CLASSIFICATION']['input_2_scale'] + '\n')
+        fp.write('output_zero_point: ' + config['QUANTIZATION_CLASSIFICATION']['output_zero_point'] + '\n')
+        fp.write('output_scale: ' + config['QUANTIZATION_CLASSIFICATION']['output_scale'] + '\n')
+        
