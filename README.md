@@ -59,6 +59,8 @@ Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_
 
 ### Training & Quantization of the CNN Models
 
+Please, refer to the specific [README](training_quantization/README.md) to gain more insights on the execution.
+
 From the main folder of this repository execute the following commands:
 
 `cd training_quantization/` \
@@ -71,6 +73,8 @@ Quantization's zero points and scale values of inputs and output are saved in th
 
 
 ### C-code generation for deployment
+
+Please, refer to the specific [README](deployment/README.md) to gain more insights on the execution.
 
 From the main folder of the repository execute the following commands:
 
