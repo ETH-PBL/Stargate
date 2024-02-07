@@ -20,7 +20,7 @@ These last are overwritten at every training and, therefore are also saved in th
 
 ## Command to perform training and quantization
 1. Check that the DATA_PATHS in the [deep_learning_config.ini](deep_learning_config.ini) file points to the directories in which you have downloaded the dataset.
-2. Adjust the training parameters in the same file.
+2. If you want, you can adjust the training parameters in the same file.
 3. Execute the following command: `python3 main_deep_learning.py` 
 
 ## Files saved throughout the execution
