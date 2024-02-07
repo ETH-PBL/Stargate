@@ -38,9 +38,11 @@ Please refer to the README in the folder `automated_data_collection` for more in
 
 ## Building and Flashing the Software
 
+Firstly, please clone this repository.
+
 ### Setting up environment and Python libraries
 
-The project has been tested using a conda environment featuring Python 3.9.18. 
+The project has been tested using Ubuntu 20.04 and a conda environment featuring Python 3.9.18. 
 It can be set by using the following commands: \
 `conda create --name Stargate python=3.9` \
 `conda activate Stargate` \
@@ -56,6 +58,7 @@ Please keep in mind that we used an older version of the SDK, therefore please u
 
 Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
 `source sourceme.h`
+
 
 ### Training & Quantization of the CNN Models
 
