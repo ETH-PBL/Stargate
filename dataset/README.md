@@ -19,10 +19,14 @@ Each run (indicated by an integer numbered folder name) contains the following s
 * roll_pitch_yaw/
 * tof_distance_array/
 * tof_validity_array/
+
+Two examples are present in this folder, one for the classification and one for the navigation tasks, to provide a fast intuition about the dataset content (`classification_sample` and `navigation_sample`). The complete dataset is available here [open-source dataset](https://zenodo.org/records/10546408).
   
 **Carefull**, several runs with the same integer numbering might exist in different folders (e.g. training and validation). Those are not the same run, but just the run numbering for each folder starting at index 0.
 
-Each recorded sensor type folder contains a variable number of datapoints per run (since the flight length was variable per run), of course with the same number of different sensor datapoints in a single run. The correspondences between the different sensor type datapoints over time are established through an integer numbering of the `.npy` files. E.g. (angular_velocities/20.npy corresponds to camera_images/20.npy, tof_distance_arrray/20.npy and so on.). **Carefull**, the numbering of the single datapoint might not be continous due to random thinning out of datapoints as described in the report.
+Each recorded sensor type folder contains a variable number of datapoints per run (since the flight length was variable per run), of course with the same number of different sensor datapoints in a single run. The correspondences between the different sensor type datapoints over time are established through an integer numbering of the `.npy` files. E.g. (angular_velocities/20.npy corresponds to camera_images/20.npy, tof_distance_arrray/20.npy and so on.). 
+
+**Carefull**, the numbering of the single datapoint might not be continous due to random thinning out of datapoints as described in the report.
 
 Additionaly, each run folder contains an `setup_image.png` showing a 2D map of the randomized world used in this run
 
