@@ -7,9 +7,6 @@
 # Work in progress. The open source material will be available in 20 days
 
 # Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs
-**Authors: *Konstantin Kalenberg*, *Hanna Müller*, *Tommaso Polonelli*,  *Alberto Schiaffino*, *Vlad Niculescu*, *Cristian Cioflan*, *Michele Magno*, *Luca Benini*** 
-
-Corresponding author: *Hanna Müller* <hanmuell@iis.ee.ethz.ch>  
 
 <img style="float: right;" src="cover.png" width="100%">
 
@@ -23,7 +20,7 @@ The following video showcases **Stargate** operating onboard a 44 g nano-drone. 
 If you use **Stargate** in an academic or industrial context, please cite the following publications:
 
 Publications: 
-* *Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs* [IEEE IoT Journal](https://ieeexplore.ieee.org/)
+* *Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs* [IEEE IoT Journal]([https://ieeexplore.ieee.org/](https://ieeexplore.ieee.org/document/10423569))
 
 ## Getting Started
 https://github.com/ETH-PBL/Matrix_ToF_Drones
