@@ -39,11 +39,9 @@ Please refer to the README in the folder `dataset` for more information on our [
 
 Please refer to the README in the folder `automated_data_collection` for more information on generating your own synthetic data.
 
-## Building and Flashing the Software
+## Building and executing the project
 
-Firstly, please clone this repository.
-
-### Setting up environment and Python libraries
+### 1-Setting up environment and Python libraries
 
 The project has been tested using Ubuntu 20.04 and a conda environment featuring Python 3.9.18. 
 It can be set by using the following commands: \
@@ -51,7 +49,7 @@ It can be set by using the following commands: \
 `conda activate Stargate` \
 `pip3 install -r requirements.txt` 
 
-### Installing necessary tools and libraries
+### 2-Installing necessary tools and libraries
 
 Install the toolchain and the SDK of GAP8, by looking at the README file of the [gap_sdk repo](https://github.com/GreenWaves-Technologies/gap_sdk/tree/e431b7f1ca687d10ad08c3def01a754583fec5da). 
 
@@ -62,10 +60,20 @@ Please keep in mind that we used an older version of the SDK, therefore please u
 Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
 `source sourceme.h`
 
+### 3-Cloning this repo
+Exit the gap_sdk folder and clone this repository: \
+`git clone <<the url of this repository>>` \
+`cd Stargate`
 
-### Training & Quantization of the CNN Models
+### 4-Downloading the dataset
+If you want to train on a small sub-set of the dataset, you can skip this section since the git repository already contains a small part of the dataset in the [dataset](dataset) folder. 
 
-Please, refer to the specific [README](training_quantization/README.md) to gain more insights on the execution.
+Download and un-zip the dataset. \
+Modify the DATA_PATHS in the [training_quantizaton/deep_learning_config.ini](training_quantizaton/deep_learning_config.ini) file so that it points to the directories in which you have downloaded the dataset.
+
+### 5-Training & Quantization of the CNN Models
+
+Please, refer to the specific [README](training_quantization/README.md) to gain more insights on the execution. 
 
 From the main folder of this repository execute the following commands:
 
@@ -78,7 +86,7 @@ The models will be saved in the following directories: \
 Quantization's zero points and scale values of inputs and output are saved in the "training_quantization/deep_learning_config.ini" file.
 
 
-### C-code generation for deployment
+### 6-C-code generation for deployment
 
 Please, refer to the specific [README](deployment/README.md) to gain more insights on the execution.
 
