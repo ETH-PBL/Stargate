@@ -41,7 +41,11 @@ Please refer to the README in the folder `automated_data_collection` for more in
 
 ## Building and executing the project
 
-### 1-Setting up environment and Python libraries
+### 1-Cloning this repo
+`git clone <<the url of this repository>>` \
+`cd Stargate`
+
+### 2-Setting up environment and Python libraries
 
 The project has been tested using Ubuntu 20.04 and a conda environment featuring Python 3.9.18. 
 It can be set by using the following commands: \
@@ -49,7 +53,8 @@ It can be set by using the following commands: \
 `conda activate Stargate` \
 `pip3 install -r requirements.txt` 
 
-### 2-Installing necessary tools and libraries
+### 3-Installing necessary tools and libraries
+Exit the git repo and perform these steps: 
 
 Install the toolchain and the SDK of GAP8, by looking at the README file of the [gap_sdk repo](https://github.com/GreenWaves-Technologies/gap_sdk/tree/e431b7f1ca687d10ad08c3def01a754583fec5da). 
 
@@ -60,12 +65,10 @@ Please keep in mind that we used an older version of the SDK, therefore please u
 Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
 `source sourceme.h`
 
-### 3-Cloning this repo
-Exit the gap_sdk folder and clone this repository: \
-`git clone <<the url of this repository>>` \
-`cd Stargate`
 
 ### 4-Downloading the dataset
+Now come back to this git repository.
+
 If you want to train on a small sub-set of the dataset, you can skip this section since the git repository already contains a small part of the dataset in the [dataset](dataset) folder. 
 
 Download and un-zip the dataset. \
