@@ -4,8 +4,6 @@
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
-# Work in progress. The open source material will be available in 20 days
-
 # Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs
 
 <img style="float: right;" src="cover.png" width="100%">
@@ -27,6 +25,26 @@ If you use **Stargate** in an academic or industrial context, please cite the fo
 
 Publications: 
 * *Stargate: Multimodal Sensor Fusion for Autonomous Navigation on Miniaturized UAVs* [IEEE IoT Journal]([https://ieeexplore.ieee.org/](https://ieeexplore.ieee.org/document/10423569))
+
+~~~~
+@article{kalenberg2024stargate,
+  title={Stargate: Multimodal Sensor Fusion for Autonomous Navigation On Miniaturized UAVs},
+  author={Kalenberg, Konstantin and M{\"u}ller, Hanna and Polonelli, Tommaso and Schiaffino, Alberto and Niculescu, Vlad and Cioflan, Cristian and Magno, Michele and Benini, Luca},
+  journal={IEEE Internet of Things Journal},
+  year={2024},
+  publisher={IEEE}
+}
+~~~~
+
+~~~~
+@article{muller2023robust,
+  title={Robust and efficient depth-based obstacle avoidance for autonomous miniaturized uavs},
+  author={M{\"u}ller, Hanna and Niculescu, Vlad and Polonelli, Tommaso and Magno, Michele and Benini, Luca},
+  journal={IEEE Transactions on Robotics},
+  year={2023},
+  publisher={IEEE}
+}
+~~~~
 
 ## Getting Started
 https://github.com/ETH-PBL/Matrix_ToF_Drones
