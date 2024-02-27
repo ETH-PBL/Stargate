@@ -84,6 +84,7 @@ Please keep in mind that we used an older version of the SDK, therefore please u
 Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
 `source sourceme.sh`
 
+Note that the older version is not compatible with Ubuntu 22.04 (only with 20.04). To build the SDK on a Ubuntu 22.04 machine you need to apply two workarounds: replace `pthread_yield();` on line 313 in `dpi_wrapper_impl.cpp` by `sched_yield();` and build the SDK with `CFLAGS="-Wno-stringop-overflow -Wno-misleading-indentation"`. Another possible workaround is to use the newest SDK - however, this is not tested.  \
 
 ### 4-Downloading the dataset
 Now come back to this git repository.
