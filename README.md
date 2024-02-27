@@ -78,10 +78,11 @@ Install the toolchain and the SDK of GAP8, by looking at the README file of the 
 
 Please keep in mind that we used an older version of the SDK, therefore please use the following commands during the installation to clone the correct commit: \
 `git clone https://github.com/GreenWaves-Technologies/gap_sdk.git` \
+`cd gap_sdk` \
 `git reset --hard e431b7f1ca687d10ad08c3def01a754583fec5da`
 
 Source the sourceme.h in the main directory of the gap_sdk and select 2-GAPOC_B_V2: \
-`source sourceme.h`
+`source sourceme.sh`
 
 
 ### 4-Downloading the dataset
