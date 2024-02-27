@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "uart_dma_setup.h": "c"
+    }
+}

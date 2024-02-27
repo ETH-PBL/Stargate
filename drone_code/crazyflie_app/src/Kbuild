@@ -1,0 +1,6 @@
+obj-y += main.o
+obj-y += uart_dma_pulp.o
+obj-y += I2C_expander.o
+obj-y += ToF_process.o
+obj-y += ToFplatform.o
+obj-y += vl53l5cx_api.o

@@ -121,6 +121,15 @@ From the main folder of the repository execute the following commands:
 The deployed models generated will be saved in the following directories: \
 "deployment/classification_model_quant", "deployment/classification_model_quant" 
 
+### 6-Flashing the drone
+## Crazyflie
+- patch eKF ToF update
+- enable DMA1
+
+## AI-deck
+- source ai-deck.sh
+- patch the kernel generator
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
