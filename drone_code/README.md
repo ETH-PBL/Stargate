@@ -1,28 +1,29 @@
-# Semester thesis real life drone repository of Alberto Schiaffino, adapted from Konstantin Kalenberg
+# Building, flashing and starting the drone code 
 
-## Patches to be applied to the crazyflie firmware
+## Prerequisites
+- Set up the crazyflie-firmware as described [here](https://github.com/bitcraze/crazyflie-firmware/blob/master/docs/building-and-flashing/build.md)
+  The newest crazyflie-firmware commit we tested functionality with is: f61da11d54b6d54c7fa746688e8e9be4edd73a29
+- Install the cfclient as described [here](https://github.com/bitcraze/crazyflie-clients-python/blob/master/docs/installation/install.md)
+  
+## Patches to be applied to the Crazyflie firmware
 - Avoid height jumps when flying over obstacles: Replace `crazyflie-firmware/src/modules/src/kalman_core/mm_tof.c` with the file content of `patches/mm_tof.c` 
 - Enable UART1 DMA: Enable `#define ENABLE_UART1_DMA` flag in `crazyflie-firmware/src/drivers/src/uart1.c`
 
----
-## Fully onboard control: Autonomous crazyflie
-- This part of the code provides the code for the CrazyFlie STM32 and the CrazyFlie AI-Deck to run the models fully on-board the drone itself. It provides the full  firmware for flying the drone.
-
-### Build and flash procedure
+## Build and flash procedure
 #### STM32
 - Move to `crazyflie_code/crazyflie_app`
 - Run `make all` to build the custom app for the STM32 
-- Put the crazyflie into bootloader mode and run `make cload` to flash code onto crazyflie. Now this app will run every time once the drone is restarted
+- Put the Crazyflie into bootloader mode (press the button long) and run `make cload` to flash code onto the Crazyflie. Now, this app will run every time the drone is restarted
 
-#### Ai deck
+#### AI deck
 - Move to `crazyflie_code/aideck_app`
-- Connect the Ai deck via JTAG and OLIMEX to your computer
+- Connect the AI deck via JTAG and OLIMEX to your computer
 - Restart the drone after you flashed the STM32, else the next step will not work
-- Source `~/gap_sdk/configs/ai_deck.sh` and run `make all flash`. You need to repeat this step every time you want to build the AI-Deck code as there is a bug in the GAP SDK. This will flash the Ai deck code onto the AI-Deck and run on every restart of the drone.
+- Source `~/gap_sdk/configs/ai_deck.sh` and run `make all flash`. You need to repeat this step every time you want to build the AI Deck code. This will flash the AI deck code onto the AI deck and run on every restart of the drone.
 
-### Flying
+## Flying
 - Restart the drone and set it down
-- Run `cfclient` to start the crazyflie client. Move to the `Parameters` tab and set the parameter `PARAM/start_flying` to 1. This will make the crazyflie take-off and autonomously navigate using the pipeline developped in my master thesis. To land, set the parameter `PARAM/landing` to 1.
+- Run `cfclient` to start the Crazyflie client. Move to the `Parameters` tab and set the parameter `PARAM/start_flying` to 1. This will make the Crazyflie take-off and autonomously navigate using Stargate. To land, set the parameter `PARAM/landing` to 1.
 
 
 #### Change height 
