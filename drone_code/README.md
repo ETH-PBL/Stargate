@@ -17,6 +17,8 @@
 
 #### AI deck
 - Move to `crazyflie_code/aideck_app`
+- Every time you execute `make all` after `make clean` (and the first time you compile), you need to do a slight modification to use the same L1 buffer for both networks (in the code that is generated):
+  comment out `gate_classifier_model_v51_L1_Memory = (AT_L1_POINTER) AT_L1_ALLOC(0, 49196);` and `if (gate_classifier_model_v51_L1_Memory == 0) return 4;` in `aideck_app/BUILD_MODEL/gate_classifier_model_v51Kernels.c` on lines 1394/1395.
 - Connect the AI deck via JTAG and OLIMEX to your computer
 - Restart the drone after you flashed the STM32, else the next step will not work
 - Source `~/gap_sdk/configs/ai_deck.sh` and run `make all flash`. You need to repeat this step every time you want to build the AI Deck code. This will flash the AI deck code onto the AI deck and run on every restart of the drone.
