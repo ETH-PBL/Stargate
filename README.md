@@ -121,6 +121,9 @@ From the main folder of the repository execute the following commands:
 The deployed models generated will be saved in the following directories: \
 "deployment/classification_model_quant", "deployment/classification_model_quant" 
 
+### 6-Flashing and starting the drone
+Please refer to the specific [README](drone_code/README.md) for more information on flashing and starting the drone.
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
