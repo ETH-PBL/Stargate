@@ -1,5 +1,5 @@
 # Generate Your Own Synthetic Data
-The [open-source dataset](https://zenodo.org/records/10546408) provided with our work was generated using the [Webots simulator](https://cyberbotics.com/). We provide the sensor settings for the simulated CrazyFlie drone, simulated camera and simulated time-of-flight sensor in the `crazyflie_webots_sensor_settings.wbt` file.
+The [open-source dataset](https://zenodo.org/records/10546408) provided with our work was generated using the [Webots simulator](https://cyberbotics.com/)  (version R2022a). We provide the sensor settings for the simulated CrazyFlie drone, simulated camera and simulated time-of-flight sensor in the `crazyflie_webots_sensor_settings.wbt` file.
 
 ## Installation Procedure
 * Clone the [Bitcraze CrazyFlie simulation](https://github.com/bitcraze/crazyflie-simulation).
