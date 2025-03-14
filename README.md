@@ -140,6 +140,10 @@ Please refer to the specific [README](drone_code/README.md) for more information
 [product-screenshot]: pics/drone.png
 
 
+## Acknowledgements
+This work received support from the Swiss National Science Foundation Project 207913 "TinyTrainer: On-chip Training for TinyML devices".
+
+
 ## License
 
 Unless explicitly stated otherwise, the code is released under GPL-3.0, see the LICENSE file in the root of this repository for details.
